@@ -6,5 +6,15 @@
 #     gem "gem-that-requires-env-variables"
 #
 
+# Needed for dotenv to work in Rails 3.0
+# https://github.com/bkeepers/dotenv/issues/151
+module Rails
+  class Railtie
+     def self.instance
+       @instance ||= new
+     end
+  end
+end
 require "dotenv/rails"
+
 Dotenv::Railtie.load
